@@ -5,8 +5,25 @@ A service that monitors [Listening Heart](https://listening-heart.onrender.com) 
 ## Features
 
 - **x402 Payment Gate**: Subscriptions require 0.001 USDC payment on Base Sepolia testnet
-- **Automatic Polling**: Checks for new notes every 5 minutes
+- **Automatic Polling**: Checks for new notes every 5 minutes (via Cloudflare Cron)
 - **Discord Notifications**: Posts rich embeds with note content, author, type, and timestamp
+
+## Deployment
+
+### Cloudflare Workers (Recommended - Free)
+
+```bash
+npm install -g wrangler
+wrangler login
+wrangler deploy
+```
+
+### Manual/Other Platforms
+
+```bash
+npm install
+npm start
+```
 
 ## API Endpoints
 
@@ -43,23 +60,13 @@ Unsubscribe from a task.
 Health check endpoint.
 
 ### GET /subscriptions
-List active subscriptions (for debugging).
+List active subscriptions.
 
-## Deployment
+## Configure Cron Trigger
 
-Deploy to any Node.js hosting (Render, Railway, Fly.io, etc.):
-
-```bash
-npm install
-npm start
-```
-
-## Development
-
-```bash
-npm install
-npm run dev
-```
+In Cloudflare Dashboard:
+1. Go to Workers > listening-heart-monitor > Triggers
+2. Add a Cron Trigger that runs every 5 minutes
 
 ## License
 
